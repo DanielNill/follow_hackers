@@ -1,0 +1,17 @@
+{
+  "name": "Follow Hackers",
+  "version": "0.0.1",
+  "description": "Keep track of your favorite users on Hacker News",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://news.ycombinator.com/*"
+      ],
+      "js": ["jquery.js", "md5.js", "follow_hackers.js"]
+    }
+  ],
+  "permissions": [
+    "http://news.ycombinator.com/*",
+    "http://localhost:5000/*"
+  ]
+}
