@@ -11,7 +11,11 @@ server = redis.Redis('localhost')
 
 @app.route('/')
 def root():
-    return "Follow Hackers: <a href='link to google web store'>Get it Here</a>"
+    return """
+        Follow Hackers: <a href='link to google web store'>Get it Here</a><br/>
+        <iframe src='http://markdotto.github.com/github-buttons/github-btn.html?user=imfatyourefat&repo=Follow-Hackers&type=watch' allowtransparency='true' frameborder='0' scrolling='0' width='62px' height='20px'></iframe>
+        <iframe src='http://markdotto.github.com/github-buttons/github-btn.html?user=imfatyourefat&repo=Follow-Hackers&type=fork' allowtransparency='true' frameborder='0' scrolling='0' width='53px' height='20px'></iframe>
+        <iframe src='http://markdotto.github.com/github-buttons/github-btn.html?user=imfatyourefat&type=follow' allowtransparency='true' frameborder='0' scrolling='0' width='132px' height='20px'></iframe>"""
 
 @app.route('/get_hackers/', methods=['GET'])
 def get_hackers():
