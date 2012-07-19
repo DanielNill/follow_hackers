@@ -2,7 +2,6 @@ import json, redis
 from flask import Flask
 from flask import render_template, request
 
-from bs4 import BeautifulSoup, SoupStrainer
 import human_curl as requests
 
 
