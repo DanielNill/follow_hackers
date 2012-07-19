@@ -1,9 +1,6 @@
-import json, redis
+import json, redis, requests
 from flask import Flask
 from flask import render_template, request
-
-import human_curl as requests
-
 
 app = Flask(__name__)
 server = redis.Redis('localhost')
@@ -20,7 +17,6 @@ def root():
 def get_hackers():
     user = request.args['user']
     hackers = server.lrange(user, 0, -1)
-    print hackers
     return json.dumps(hackers)
 
 @app.route('/is_following/', methods=['GET'])
@@ -56,10 +52,11 @@ def hackers_stories():
     highlight_ids = []
     for hacker in hackers:
         r = requests.get('http://api.thriftdb.com/api.hnsearch.com/items/_search?q=' + hacker + '&limit=50&sortby=create_ts+desc')
-        content = json.loads(r.content)
+        content = r.json
         for item in content['results']:
             try:
-                if str(item['item']['discussion']['id']) in story_ids:
+                # the story is on the page and the comment was made by the hacker
+                if str(item['item']['discussion']['id']) in story_ids and str(item['item']['username']) == hacker:
                     highlight_ids.append(item['item']['discussion']['id'])
             except:
                 pass
