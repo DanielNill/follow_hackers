@@ -5,7 +5,7 @@
     var pathnames = ['/item', '/threads', '/newcomments'];
     if(pathnames.indexOf(window.location.pathname) !== -1){
         $.ajax({
-            url: 'http://localhost:5000/get_hackers/',
+            url: 'http://followhackers.danielnill.com/get_hackers/',
             type: 'GET', 
             dataType: 'json',
             data: {'user': user},
@@ -16,7 +16,7 @@
                     $('.comhead').each(function(i){
                         if(i !== 0){
                             var hacker = $(this).children('a').first().text();
-                            console.log(hacker);
+                            //console.log(hacker);
                             if(data.indexOf(String(hacker)) !== -1){
                                 $(this).parent().parent().css('background-color', 'yellow');
                             }
@@ -41,7 +41,7 @@
 
         //get stories with followed hackers
         $.ajax({
-            url: 'http://localhost:5000/hackers_stories/',
+            url: 'http://followhackers.danielnill.com/hackers_stories/',
             data: {"user": user, "story_ids": story_ids.join(',')},
             dataType: 'json',
             type: 'get',
@@ -55,7 +55,7 @@
                             $(this).css('background-color', 'yellow');
                         }
                         else{
-                            console.log(story.split('=')[1]);
+                            //console.log(story.split('=')[1]);
                         }
                     }
                 });
@@ -69,7 +69,7 @@
     if(window.location.pathname == '/user' && hacker !== user){
         //check if they are currently following the user
         $.ajax({
-            url: "http://localhost:5000/is_following/",
+            url: "http://followhackers.danielnill.com/is_following/",
             data: {"hacker": hacker, "user": user},
             type: 'GET',
             dataType: "json",
@@ -91,7 +91,7 @@
             if(is_following){
                 //make ajax call to unfollow
                 $.ajax({
-                    url: "http://localhost:5000/unfollow/",
+                    url: "http://followhackers.danielnill.com/unfollow/",
                     type: 'POST',
                     data: {"hacker": hacker, "user": user},
                     dataType: "json",
@@ -103,7 +103,7 @@
             else{
                 //make ajax call to follow
                 $.ajax({
-                    url: "http://localhost:5000/follow/",
+                    url: "http://followhackers.danielnill.com/follow/",
                     type: 'POST',
                     data: {'hacker': hacker, 'user': user},
                     dataType: 'json',
@@ -122,7 +122,7 @@
     //if they are on their page display the users they are following
     if(window.location.pathname == '/user' && hacker == user){
         $.ajax({
-            url: 'http://localhost:5000/get_hackers/',
+            url: 'http://followhackers.danielnill.com/get_hackers/',
             type: 'GET', 
             dataType: 'json',
             data: {'user': user},

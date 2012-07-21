@@ -1,5 +1,5 @@
 import json, redis, requests
-from settings import *
+from settings import redis_host, redis_port
 from flask import Flask
 from flask import render_template, request
 
