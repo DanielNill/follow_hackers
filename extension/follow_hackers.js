@@ -4,6 +4,7 @@
     //highlight comments
     var pathnames = ['/item', '/threads', '/newcomments'];
     if(pathnames.indexOf(window.location.pathname) !== -1){
+        var focus_num = 0;
         $.ajax({
             url: 'http://followhackers.danielnill.com/get_hackers/',
             type: 'GET', 
@@ -11,18 +12,34 @@
             data: {'user': user},
             async: false,
             success: function(data){
+                $('center').first().append('<span style="position: fixed; top:225px; right: 4%;"><a href="javascript:self.moveTo(3000,200)" id="follow_hackers_nav">V<br/>V</a></span>');
+                
                 if(data.length > 0){
-                    console.log(data);
+                    var count = 0;
                     $('.comhead').each(function(i){
                         if(i !== 0){
                             var hacker = $(this).children('a').first().text();
-                            //console.log(hacker);
                             if(data.indexOf(String(hacker)) !== -1){
                                 $(this).parent().parent().css('background-color', 'yellow');
+                                $(this).parent().parent().prepend('<span id="follow_hackers_' + count + '"></span>');
+                                count++;
                             }
                         }
                     });
                 }
+
+                //listener to change out bookmark link everytime the nav is clicked
+                $('#follow_hackers_nav').click(function(e){
+                    //scroll back to first comment if we are at the last one.
+                    if(focus_num >= count){
+                        focus_num = 0;
+                        document.getElementById('follow_hackers_' + focus_num).scrollIntoView();
+                    }
+                    else{
+                        document.getElementById('follow_hackers_' + focus_num).scrollIntoView();
+                        focus_num++;
+                    }
+                });
             }
         });
     }
