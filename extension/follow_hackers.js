@@ -46,7 +46,6 @@
             dataType: 'json',
             type: 'get',
             success: function(data){
-                console.log(data);
                 $('.subtext').each(function(i){
                     var story = $(this).children().last().attr('href');
                     // handle for stories without comment links
