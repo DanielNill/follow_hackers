@@ -1,9 +1,10 @@
 import json, redis, requests
+from settings import *
 from flask import Flask
 from flask import render_template, request
 
 app = Flask(__name__)
-server = redis.Redis('localhost')
+server = redis.Redis(host=redis_host, port=redis_port)
 
 @app.route('/')
 def root():
