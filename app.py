@@ -9,7 +9,7 @@ server = redis.Redis(host=redis_host, port=redis_port)
 @app.route('/')
 def root():
     return """
-        Follow Hackers: <a href='link to google web store'>Get it Here</a><br/>
+        Follow Hackers: <a href='https://chrome.google.com/webstore/detail/hapackcnjagkljgfjlgonohbabnfgopc?hl=en&gl=US'>Get it Here</a><br/>
         <iframe src='http://markdotto.github.com/github-buttons/github-btn.html?user=imfatyourefat&repo=Follow-Hackers&type=watch' allowtransparency='true' frameborder='0' scrolling='0' width='62px' height='20px'></iframe>
         <iframe src='http://markdotto.github.com/github-buttons/github-btn.html?user=imfatyourefat&repo=Follow-Hackers&type=fork' allowtransparency='true' frameborder='0' scrolling='0' width='53px' height='20px'></iframe>
         <iframe src='http://markdotto.github.com/github-buttons/github-btn.html?user=imfatyourefat&type=follow' allowtransparency='true' frameborder='0' scrolling='0' width='132px' height='20px'></iframe>"""
