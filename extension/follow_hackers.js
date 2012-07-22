@@ -12,21 +12,19 @@
             data: {'user': user},
             async: false,
             success: function(data){
-                $('center').first().append('<span style="position: fixed; top:225px; right: 4%;"><a href="javascript:self.moveTo(3000,200)" id="follow_hackers_nav">V<br/>V</a></span>');
-                
                 if(data.length > 0){
                     var count = 0;
                     $('.comhead').each(function(i){
-                        if(i !== 0){
-                            var hacker = $(this).children('a').first().text();
-                            if(data.indexOf(String(hacker)) !== -1){
-                                //if user selected a color use that otherwise use default
-                                $(this).children().first().css({'color': '#ff6600'});
-                                $(this).parent().parent().prepend('<span id="follow_hackers_' + count + '"></span>');
-                                count++;
-                            }
+                        var hacker = $(this).children('a').first().text();
+                        if(data.indexOf(String(hacker)) !== -1){
+                            $(this).children().first().css({'color': '#ff6600'});
+                            $(this).parent().parent().prepend('<span id="follow_hackers_' + count + '"></span>');
+                            count++;
                         }
                     });
+                    if(count > 0){
+                        $('center').first().append('<span style="position: fixed; top:225px; right: 4%;"><a href="javascript:self.moveTo(3000,200)" id="follow_hackers_nav">V<br/>V</a></span>');
+                    }
                 }
 
                 //listener to change out bookmark link everytime the nav is clicked
