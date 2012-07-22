@@ -10,7 +10,7 @@
       "matches": [
         "http://news.ycombinator.com/*"
       ],
-      "js": ["jquery.js", "md5.js", "follow_hackers.js"]
+      "js": ["jquery.js", "follow_hackers.js"]
     }
   ],
   "permissions": [

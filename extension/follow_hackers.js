@@ -20,7 +20,8 @@
                         if(i !== 0){
                             var hacker = $(this).children('a').first().text();
                             if(data.indexOf(String(hacker)) !== -1){
-                                $(this).parent().parent().css('background-color', 'yellow');
+                                //if user selected a color use that otherwise use default
+                                $(this).children().first().css({'color': '#ff6600'});
                                 $(this).parent().parent().prepend('<span id="follow_hackers_' + count + '"></span>');
                                 count++;
                             }
@@ -68,7 +69,7 @@
                     // handle for stories without comment links
                     if(story !== undefined){
                         if(data.indexOf(Number(story.split('=')[1])) != -1){
-                            $(this).css('background-color', 'yellow');
+                            $(this).css({'background-color': 'rgba(255, 102, 0, 0.5)'});
                         }
                         else{
                             //console.log(story.split('=')[1]);
