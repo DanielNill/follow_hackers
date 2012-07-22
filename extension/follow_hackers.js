@@ -69,7 +69,7 @@
                     // handle for stories without comment links
                     if(story !== undefined){
                         if(data.indexOf(Number(story.split('=')[1])) != -1){
-                            $(this).css({'background-color': 'rgba(255, 102, 0, 0.5)'});
+                            $(this).children().last().css({'color': '#ff6600'});
                         }
                         else{
                             //console.log(story.split('=')[1]);
