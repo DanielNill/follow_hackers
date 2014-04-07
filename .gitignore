@@ -30,3 +30,6 @@ pip-log.txt
 .DS_Store
 
 settings.py
+
+venv
+*.pyc
