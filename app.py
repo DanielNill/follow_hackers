@@ -1,10 +1,9 @@
-import json, redis, requests
-from settings import redis_host, redis_port
+import json, redis, requests, os
 from flask import Flask
 from flask import render_template, request
 
 app = Flask(__name__)
-server = redis.Redis(host=redis_host, port=redis_port)
+server = redis.from_url(os.getenv('REDISTOGO_URL', 'redis://localhost:6379'))
 
 @app.route('/')
 def root():
@@ -33,7 +32,7 @@ def is_following():
 @app.route('/follow/', methods=['POST'])
 def follow():
     user = request.form['user']
-    hacker = request.form['hacker']    
+    hacker = request.form['hacker']
     server.rpush(user, hacker)
     return json.dumps(True)
 
