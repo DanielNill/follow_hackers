@@ -6,8 +6,8 @@
     if(pathnames.indexOf(window.location.pathname) !== -1){
         var focus_num = 0;
         $.ajax({
-            url: 'http://followhackers.danielnill.com/get_hackers/',
-            type: 'GET', 
+            url: 'http://follow-hackers.herokuapp.com/get_hackers/',
+            type: 'GET',
             dataType: 'json',
             data: {'user': user},
             async: false,
@@ -57,7 +57,7 @@
 
         //get stories with followed hackers
         $.ajax({
-            url: 'http://followhackers.danielnill.com/hackers_stories/',
+            url: 'http://follow-hackers.herokuapp.com/hackers_stories/',
             data: {"user": user, "story_ids": story_ids.join(',')},
             dataType: 'json',
             type: 'get',
@@ -77,14 +77,14 @@
             }
         })
     }
-    
+
     var hacker = window.location.search.split('=')[1];
 
     //if they are viewing someone's user page allow them to follow or unfollow
     if(window.location.pathname == '/user' && hacker !== user){
         //check if they are currently following the user
         $.ajax({
-            url: "http://followhackers.danielnill.com/is_following/",
+            url: "http://follow-hackers.herokuapp.com/is_following/",
             data: {"hacker": hacker, "user": user},
             type: 'GET',
             dataType: "json",
@@ -106,7 +106,7 @@
             if(is_following){
                 //make ajax call to unfollow
                 $.ajax({
-                    url: "http://followhackers.danielnill.com/unfollow/",
+                    url: "http://follow-hackers.herokuapp.com/unfollow/",
                     type: 'POST',
                     data: {"hacker": hacker, "user": user},
                     dataType: "json",
@@ -118,7 +118,7 @@
             else{
                 //make ajax call to follow
                 $.ajax({
-                    url: "http://followhackers.danielnill.com/follow/",
+                    url: "http://follow-hackers.herokuapp.com/follow/",
                     type: 'POST',
                     data: {'hacker': hacker, 'user': user},
                     dataType: 'json',
@@ -131,14 +131,14 @@
 
         $('table:eq(2)').append('<tr><td></td><td id="follow_link"></td></tr>');
         $('#follow_link').html(link);
-        
+
     }
 
     //if they are on their page display the users they are following
     if(window.location.pathname == '/user' && hacker == user){
         $.ajax({
-            url: 'http://followhackers.danielnill.com/get_hackers/',
-            type: 'GET', 
+            url: 'http://follow-hackers.herokuapp.com/get_hackers/',
+            type: 'GET',
             dataType: 'json',
             data: {'user': user},
             success: function(data){
