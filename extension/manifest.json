@@ -1,6 +1,6 @@
 {
   "name": "Follow Hackers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Keep track of your favorite users on Hacker News",
   "icons": {
     "128": "yc-company.png"
@@ -8,13 +8,14 @@
   "content_scripts": [
     {
       "matches": [
-        "http://news.ycombinator.com/*"
+        "https://news.ycombinator.com/*"
       ],
       "js": ["jquery.js", "follow_hackers.js"]
     }
   ],
   "permissions": [
-    "http://news.ycombinator.com/*",
-    "http://followhackers.danielnill.com/*"
-  ]
+    "https://news.ycombinator.com/*",
+    "http://follow-hackers.herokuapp.com/*"
+  ],
+  "manifest_version": 2
 }

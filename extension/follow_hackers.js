@@ -1,4 +1,5 @@
 (function(){
+    var rootUrl = "http://follow-hackers.herokuapp.com"
     var user = $('.pagetop:eq(1)').find('a').first().text();
 
     //highlight comments
@@ -6,25 +7,27 @@
     if(pathnames.indexOf(window.location.pathname) !== -1){
         var focus_num = 0;
         $.ajax({
-            url: 'http://follow-hackers.herokuapp.com/get_hackers/',
+            url: rootUrl + '/get_hackers/',
             type: 'GET',
             dataType: 'json',
             data: {'user': user},
             async: false,
             success: function(data){
+                $('center').first().append('<span style="position: fixed; top:225px; right: 4%;"><a href="javascript:self.moveTo(3000,200)" id="follow_hackers_nav">V<br/>V</a></span>');
+
                 if(data.length > 0){
                     var count = 0;
                     $('.comhead').each(function(i){
-                        var hacker = $(this).children('a').first().text();
-                        if(data.indexOf(String(hacker)) !== -1){
-                            $(this).children().first().css({'color': '#ff6600'});
-                            $(this).parent().parent().prepend('<span id="follow_hackers_' + count + '"></span>');
-                            count++;
+                        if(i !== 0){
+                            var hacker = $(this).children('a').first().text();
+                            if(data.indexOf(String(hacker)) !== -1){
+                                //if user selected a color use that otherwise use default
+                                $(this).children().first().css({'color': '#ff6600'});
+                                $(this).parent().parent().prepend('<span id="follow_hackers_' + count + '"></span>');
+                                count++;
+                            }
                         }
                     });
-                    if(count > 0){
-                        $('center').first().append('<span style="position: fixed; top:225px; right: 4%;"><a href="javascript:self.moveTo(3000,200)" id="follow_hackers_nav">V<br/>V</a></span>');
-                    }
                 }
 
                 //listener to change out bookmark link everytime the nav is clicked
@@ -57,7 +60,7 @@
 
         //get stories with followed hackers
         $.ajax({
-            url: 'http://follow-hackers.herokuapp.com/hackers_stories/',
+            url: rootUrl + '/hackers_stories/',
             data: {"user": user, "story_ids": story_ids.join(',')},
             dataType: 'json',
             type: 'get',
@@ -67,7 +70,7 @@
                     // handle for stories without comment links
                     if(story !== undefined){
                         if(data.indexOf(Number(story.split('=')[1])) != -1){
-                            $(this).children().last().css({'color': '#ff6600'});
+                            $(this).css({'background-color': 'rgba(255, 102, 0, 0.5)'});
                         }
                         else{
                             //console.log(story.split('=')[1]);
@@ -84,7 +87,7 @@
     if(window.location.pathname == '/user' && hacker !== user){
         //check if they are currently following the user
         $.ajax({
-            url: "http://follow-hackers.herokuapp.com/is_following/",
+            url: rootUrl + "/is_following/",
             data: {"hacker": hacker, "user": user},
             type: 'GET',
             dataType: "json",
@@ -106,7 +109,7 @@
             if(is_following){
                 //make ajax call to unfollow
                 $.ajax({
-                    url: "http://follow-hackers.herokuapp.com/unfollow/",
+                    url: rootUrl + "/unfollow/",
                     type: 'POST',
                     data: {"hacker": hacker, "user": user},
                     dataType: "json",
@@ -118,7 +121,7 @@
             else{
                 //make ajax call to follow
                 $.ajax({
-                    url: "http://follow-hackers.herokuapp.com/follow/",
+                    url: rootUrl + "/follow/",
                     type: 'POST',
                     data: {'hacker': hacker, 'user': user},
                     dataType: 'json',
@@ -137,7 +140,7 @@
     //if they are on their page display the users they are following
     if(window.location.pathname == '/user' && hacker == user){
         $.ajax({
-            url: 'http://follow-hackers.herokuapp.com/get_hackers/',
+            url: rootUrl + '/get_hackers/',
             type: 'GET',
             dataType: 'json',
             data: {'user': user},
