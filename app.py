@@ -51,13 +51,13 @@ def hackers_stories():
 
     highlight_ids = []
     for hacker in hackers:
-        r = requests.get('http://api.thriftdb.com/api.hnsearch.com/items/_search?q=' + hacker + '&limit=50&sortby=create_ts+desc')
-        content = r.json
-        for item in content['results']:
+        r = requests.get('http://hn.algolia.com/api/v1/search_by_date?tags=comment,author_' + hacker)
+        content = r.json()
+        for item in content['hits']:
             try:
                 # the story is on the page and the comment was made by the hacker
-                if str(item['item']['discussion']['id']) in story_ids and str(item['item']['username']) == hacker:
-                    highlight_ids.append(item['item']['discussion']['id'])
+                if str(item['story_id']) in story_ids: #and str(item['author']) == hacker:
+                    highlight_ids.append(item['story_id'])
             except:
                 pass
     return json.dumps(list(set(highlight_ids)))

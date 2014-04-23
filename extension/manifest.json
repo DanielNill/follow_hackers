@@ -15,7 +15,7 @@
   ],
   "permissions": [
     "https://news.ycombinator.com/*",
-    "http://follow-hackers.herokuapp.com/*"
+    "http://localhost:5000/*" //"http://follow-hackers.herokuapp.com/*"
   ],
   "manifest_version": 2
 }

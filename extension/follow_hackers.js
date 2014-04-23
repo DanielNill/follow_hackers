@@ -1,5 +1,5 @@
 (function(){
-    var rootUrl = "http://follow-hackers.herokuapp.com"
+    var rootUrl = "http://localhost:5000" //"http://follow-hackers.herokuapp.com"
     var user = $('.pagetop:eq(1)').find('a').first().text();
 
     //highlight comments
